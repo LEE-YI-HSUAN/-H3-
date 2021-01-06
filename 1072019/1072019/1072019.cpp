@@ -1,6 +1,7 @@
-﻿// 1072019.cpp : 此檔案包含 'main' 函式。程式會於該處開始執行及結束執行。
-//若兄弟姊妹有明確要求(年長、年幼)可能會錯
-//如果有我的關係，性別可能會錯
+﻿// 1072019 
+//作品：稱謂計算器
+//製作者：李苡瑄
+//完成日期(最後修改): 2021/01/05
 #include <iostream>
 #include <stack>
 #include <fstream>
@@ -21,18 +22,18 @@ struct result_infor {
 class judge {
 public:
 	//自己
-	string myself(bool male, string r,string n) {
+	string myself(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "爸爸") return "父親";
 			else if (r == "兒子(較年輕)" || r == "兒子(較年長)") return "兒子";
 			else if (r == "哥哥(較年長)" || r == "哥哥") return "哥哥";
 			else if (r == "弟弟(較年輕)" || r == "弟弟") return "弟弟";
-			else if (r == "我(男)" || r == "我(女)"||r =="我") return "自己";
+			else if (r == "我(男)" || r == "我(女)" || r == "我") return "自己";
 			else if (mysex == 3 || mysex == 1) {
 				if (r == "丈夫") {
 					mysex = 3;
 					return "夫";
-				}			
+				}
 			}
 		}
 		else {
@@ -40,7 +41,7 @@ public:
 			else if (r == "女兒(較年輕)" || r == "女兒(較年長)") return "女兒";
 			else if (r == "姊姊(較年長)" || r == "姊姊") return "姊姊";
 			else if (r == "妹妹(較年輕)" || r == "妹妹") return "妹妹";
-			else if (r == "我(男)" || r == "我(女)"|| r == "我") return "自己";
+			else if (r == "我(男)" || r == "我(女)" || r == "我") return "自己";
 			else if (mysex == 2 || mysex == 1) {
 				if (r == "妻子") {
 					mysex = 2;
@@ -81,7 +82,7 @@ public:
 	string mother(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "爸爸") return "外祖父";
-			else if (r == "哥哥" || r == "弟弟"|| r == "哥哥(較年長)"/*|| r == "哥哥(較年輕)"|| r == "弟弟(較年長)" */|| r == "弟弟(較年輕)") return "舅舅";
+			else if (r == "哥哥" || r == "弟弟" || r == "哥哥(較年長)" || r == "弟弟(較年輕)") return "舅舅";
 			else if (r == "丈夫") return "父親";
 			else if (r == "兒子(較年長)") return "哥哥";
 			else if (r == "兒子(較年輕)") return "弟弟";
@@ -89,7 +90,6 @@ public:
 				if (mysex == 1 || mysex == 2) return "自己";
 				else return "哥哥";
 			}
-			//else if (r == "我") return "母親";
 		}
 		else {
 			if (r == "媽媽") return "外祖母";
@@ -112,20 +112,14 @@ public:
 			else if (r == "哥哥(較年長)" || r == "哥哥(較年輕)" || r == "弟弟(較年長)") return "哥哥";
 			else if (r == "弟弟(較年輕)") return "弟弟";
 			else if (r == "哥哥" || r == "弟弟") return "哥哥";
-			//else if (r == "丈夫") return "姊夫";
 			else if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "外甥";
-			//else if (r == "我(男)") return "姊夫";
 			else if (r == "我") return n;
 			else return "姊夫";
 		}
 		else {
 			if (r == "媽媽") return "母親";
-			//else if (r == "姊姊(較年長)"|| r == "姊姊(較年輕)" || r == "妹妹(較年長)") return "姊姊";
 			else if (r == "妹妹(較年輕)") return "妹妹";
-			//else if (r == "姊姊" || r == "妹妹") return "姊姊";
-			//else if (r == "妻子") return "姊姊";
-			else if (r == "女兒" || r =="女兒(較年長)" || r == "女兒(較年輕)") return "外甥女";
-			//else if (r == "我(女)") return "姊姊";
+			else if (r == "女兒" || r == "女兒(較年長)" || r == "女兒(較年輕)") return "外甥女";
 			else return "姊姊";
 		}
 	}
@@ -133,23 +127,17 @@ public:
 	string older_bother(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "爸爸") return "父親";
-			//else if (r == "哥哥(較年長)" || r == "哥哥(較年輕)" || r == "弟弟(較年長)") return "哥哥";
 			else if (r == "弟弟(較年輕)") return "弟弟";
-			//else if (r == "哥哥" || r == "弟弟") return "哥哥";
-			//else if (r == "丈夫") return "哥哥";
 			else if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "姪子";
-			//else if (r == "我(男)") return "哥哥";
 			else if (r == "我") return n;
 			else return "哥哥";
 		}
 		else {
 			if (r == "媽媽") return "母親";
-			else if (r == "姊姊(較年長)" || r == "姊姊(較年輕)"|| r == "妹妹(較年長)") return "姊姊";
+			else if (r == "姊姊(較年長)" || r == "姊姊(較年輕)" || r == "妹妹(較年長)") return "姊姊";
 			else if (r == "妹妹(較年輕)") return "妹妹";
 			else if (r == "姊姊" || r == "妹妹") return "姊姊";
-			//else if (r == "妻子") return "嫂嫂";
 			else if (r == "女兒" || r == "女兒(較年輕)" || r == "女兒(較年長)") return "姪女";
-			//else if (r == "我(女)") return "嫂嫂";
 			else return "嫂嫂";
 		}
 	}
@@ -158,20 +146,15 @@ public:
 		if (male == true) {
 			if (r == "爸爸") return "父親";
 			else if (r == "哥哥(較年長)") return "哥哥";
-			else if (r == "哥哥(較年輕)"|| r == "弟弟(較年長)" || r == "弟弟(較年輕)") return "弟弟";
+			else if (r == "哥哥(較年輕)" || r == "弟弟(較年長)" || r == "弟弟(較年輕)") return "弟弟";
 			else if (r == "弟弟" || r == "哥哥") return "弟弟";
-			//else if (r == "丈夫") return "妹夫";
 			else if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "外甥";
-			//else if (r == "我(男)") return "妹夫";
 			else if (r == "我") return n;
 			else return "妹夫";
 		}
 		else {
 			if (r == "媽媽") return "母親";
 			else if (r == "姊姊(較年長)") return "姊姊";
-			//else if (r == "姊姊(較年輕)"|| r == "妹妹(較年長)"|| r == "妹妹(較年輕)") return "妹妹";
-			//else if (r == "妹妹" || r == "姊姊") return "妹妹";
-			//else if (r == "妻子") return "妹妹";
 			else if (r == "女兒" || r == "女兒(較年輕)" || r == "女兒(較年長)") return "外甥女";
 			else return "妹妹";
 		}
@@ -181,9 +164,6 @@ public:
 		if (male == true) {
 			if (r == "爸爸") return "父親";
 			else if (r == "哥哥(較年長)") return "哥哥";
-			//else if (r == "哥哥(較年輕)"|| r == "弟弟(較年長)"|| r == "弟弟(較年輕)") return "弟弟";
-			//else if (r == "弟弟" || r == "哥哥") return "弟弟";
-			//else if (r == "丈夫") return "弟弟";
 			else if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "姪子";
 			else if (r == "我") return n;
 			else return "弟弟";
@@ -191,9 +171,8 @@ public:
 		else {
 			if (r == "媽媽") return "母親";
 			else if (r == "姊姊(較年長)") return "姊姊";
-			else if (r == "姊姊(較年輕)"|| r == "妹妹(較年長)" || r == "妹妹(較年輕)") return "妹妹";
+			else if (r == "姊姊(較年輕)" || r == "妹妹(較年長)" || r == "妹妹(較年輕)") return "妹妹";
 			else if (r == "妹妹" || r == "姊姊") return "妹妹";
-			//else if (r == "妻子") return "弟媳";
 			else if (r == "女兒" || r == "女兒(較年輕)" || r == "女兒(較年長)") return "姪女";
 			else return "弟媳";
 		}
@@ -202,14 +181,9 @@ public:
 	string mother_bother(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "爸爸") return "外祖父";
-			/*else if (r == "哥哥" || r == "弟弟" 
-				|| r == "哥哥(較年長)" || r == "哥哥(較年輕)" 
-				|| r == "弟弟(較年輕)" || r == "弟弟(較年長)") return "舅舅";*/
-			//else if (r == "丈夫") return "舅舅";
 			else if (r == "兒子(較年長)") return "表兄";
 			else if (r == "兒子(較年輕)") return "表弟";
 			else if (r == "兒子") return "表弟";
-			//else if (r == "我") return n;
 			else return "舅舅";
 		}
 		else {
@@ -218,7 +192,6 @@ public:
 			else if (r == "姊姊" || r == "妹妹"
 				|| r == "姊姊(較年長)" || r == "姊姊(較年輕)"
 				|| r == "妹妹(較年輕)" || r == "妹妹(較年長)") return "姨媽";
-			//else if (r == "妻子") return "舅媽";
 			else if (r == "女兒(較年長)") return "表姊";
 			else if (r == "女兒(較年輕)") return "表妹";
 			else if (r == "女兒") return "表妹";
@@ -232,7 +205,6 @@ public:
 			else if (r == "哥哥" || r == "弟弟"
 				|| r == "哥哥(較年長)" || r == "哥哥(較年輕)"
 				|| r == "弟弟(較年輕)" || r == "弟弟(較年長)") return "舅舅";
-			//else if (r == "丈夫") return "姨丈";
 			else if (r == "兒子(較年長)") return "表兄";
 			else if (r == "兒子(較年輕)") return "表弟";
 			else if (r == "兒子") return "表弟";
@@ -241,10 +213,6 @@ public:
 		}
 		else {
 			if (r == "媽媽") return "外祖母";
-			/*else if (r == "姊姊" || r == "妹妹"
-				|| r == "姊姊(較年長)" || r == "姊姊(較年輕)"
-				|| r == "妹妹(較年輕)" || r == "妹妹(較年長)") return "姨媽"; */    //有可能是媽媽
-			//else if (r == "妻子") return "姨媽";
 			else if (r == "女兒(較年長)") return "表姊";
 			else if (r == "女兒(較年輕)") return "表妹";
 			else if (r == "女兒") return "表妹";
@@ -254,13 +222,13 @@ public:
 	//外祖父、外祖母
 	string mother_parents(bool male, string r, string n) {
 		if (male == true) {
-			if (r == "兒子"|| r == "兒子(較年長)" || r == "兒子(較年輕)") return "舅舅";
+			if (r == "兒子" || r == "兒子(較年長)" || r == "兒子(較年輕)") return "舅舅";
 			else if (r == "我") return n;
-			else /*if(r == "丈夫")*/ return "外祖父";
+			else return "外祖父";
 		}
 		else {
-			if (r == "女兒"|| r == "女兒(較年長)"|| r == "女兒(較年輕)") return "姨媽";        //可能是媽媽
-			else /*if (r == "妻子")*/ return "外祖母";
+			if (r == "女兒" || r == "女兒(較年長)" || r == "女兒(較年輕)") return "姨媽";        //可能是媽媽
+			else return "外祖母";
 		}
 	}
 	//祖父、祖母
@@ -270,11 +238,11 @@ public:
 			else if (r == "兒子(較年輕)") return "叔父";
 			else if (r == "兒子(較年長)") return "伯父";
 			else if (r == "我") return n;
-			else /*if (r == "丈夫")*/ return "祖父";
+			else return "祖父";
 		}
 		else {
 			if (r == "女兒" || r == "女兒(較年輕)" || r == "女兒(較年長)") return "姑媽";
-			else /*if (r == "妻子")*/ return "祖母";
+			else return "祖母";
 		}
 	}
 	//伯母、伯父
@@ -282,16 +250,13 @@ public:
 		if (male == true) {
 			if (r == "爸爸") return "祖父";
 			else if (r == "弟弟(較年輕)" || r == "弟弟") return "叔父";
-			//else if (r == "哥哥" || r == "哥哥(較年長)" || r == "哥哥(較年輕)"/*不應該出現*/|| r == "弟弟(較年長)") return "伯父";
-			//else if (r == "丈夫") return "伯父";
 			else if (r == "兒子(較年長)") return "堂兄";
 			else if (r == "兒子(較年輕)" || r == "兒子") return "堂弟";
 			else return "伯父";
 		}
 		else {
 			if (r == "媽媽") return "祖母";
-			else if (r == "姊姊" || r == "妹妹" || r == "姐姐(較年輕)"|| r == "姐姐(較年長)" || r == "妹妹(較年輕)" || r == "妹妹(較年長)") return "姑媽";
-			//else if (r == "妻子") return "伯母";
+			else if (r == "姊姊" || r == "妹妹" || r == "姐姐(較年輕)" || r == "姐姐(較年長)" || r == "妹妹(較年輕)" || r == "妹妹(較年長)") return "姑媽";
 			else if (r == "女兒(較年長)") return "堂姊";
 			else if (r == "女兒" || r == "女兒(較年輕)") return "堂妹";
 			else if (r == "我") return n;
@@ -303,8 +268,7 @@ public:
 	string father_Ybother(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "爸爸") return "祖父";
-			//else if (r == "弟弟" || r == "哥哥(較年輕)" || r == "弟弟(較年輕)") return "叔父";
-			else if (r == "哥哥" || r == "弟弟(較年長)"/*不應該出現*/ || r == "哥哥(較年長)") return "伯父";
+			else if (r == "哥哥" || r == "弟弟(較年長)" || r == "哥哥(較年長)") return "伯父";
 			else if (r == "丈夫") return "叔父";
 			else if (r == "兒子(較年長)") return "堂兄";
 			else if (r == "兒子(較年輕)" || r == "兒子") return "堂弟";
@@ -314,7 +278,6 @@ public:
 		else {
 			if (r == "媽媽") return "祖母";
 			else if (r == "姊姊" || r == "妹妹" || r == "姐姐(較年輕)" || r == "姐姐(較年長)" || r == "妹妹(較年輕)" || r == "妹妹(較年長)") return "姑媽";
-			//else if (r == "妻子") return "嬸嬸";
 			else if (r == "女兒(較年長)") return "堂姊";
 			else if (r == "女兒" || r == "女兒(較年輕)") return "堂妹";
 			else return "嬸嬸";
@@ -327,7 +290,6 @@ public:
 			if (r == "爸爸") return "祖父";
 			else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)") return "叔父";
 			else if (r == "哥哥" || r == "弟弟" || r == "弟弟(較年長)" || r == "哥哥(較年長)") return "伯父";
-			//else if (r == "丈夫") return "姑丈";
 			else if (r == "兒子(較年長)") return "表兄";
 			else if (r == "兒子(較年輕)" || r == "兒子") return "表弟";
 			else if (r == "我") return n;
@@ -335,8 +297,6 @@ public:
 		}
 		else {
 			if (r == "媽媽") return "祖母";
-			//else if (r == "姊姊" || r == "妹妹" || r == "姐姐(較年輕)" || r == "姐姐(較年長)" || r == "妹妹(較年輕)" || r == "妹妹(較年長)") return "姑媽";
-			//else if (r == "妻子") return "姑媽";
 			else if (r == "女兒(較年長)") return "表姊";
 			else if (r == "女兒" || r == "女兒(較年輕)") return "表妹";
 			else return "姑媽";
@@ -386,13 +346,13 @@ public:
 			if (r == "兒子(較年長)" || r == "兒子") return "妻兄";
 			else  if (r == "兒子(較年輕)") return "妻弟";
 			else if (r == "我") return n;
-			else /*if (r == "丈夫")*/ return "妻父";
+			else return "妻父";
 
 		}
 		else {
 			if (r == "女兒(較年長)" || r == "女兒") return "妻姊";
 			else if (r == "女兒(較年輕)") return "妻妹";
-			else /*if (r == "妻子")*/ return "妻母";
+			else return "妻母";
 		}
 	}
 	//夫父、夫母
@@ -401,51 +361,49 @@ public:
 			if (r == "兒子(較年長)" || r == "兒子") return "夫兄";
 			else  if (r == "兒子(較年輕)") return "夫弟";
 			else if (r == "我") return n;
-			else /*if (r == "丈夫")*/ return "夫父";
+			else return "夫父";
 		}
 		else {
 			if (r == "女兒" || r == "女兒(較年長)") return "夫姊";
 			else if (r == "女兒(較年輕)") return "夫妹";
-			else /*if (r == "妻子")*/ return "夫母";
+			else return "夫母";
 		}
 	}
 	//妻兄、妻兄嫂
 	string wife_Obother(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "外甥";
-			//else if (r == "哥哥" || r == "哥哥(較年長)" || r == "弟弟(較年長)") return "妻兄";
-			else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)"  /*不應該出現*/ || r == "弟弟") return "妻弟";
+			else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)" || r == "弟弟") return "妻弟";
 			else if (r == "爸爸") return "妻父";
 			else if (r == "我") return n;
-			else/* if (r == "丈夫")*/return "妻兄";
+			else return "妻兄";
 
 		}
 		else {
 			if (r == "女兒" || r == "女兒(較年長)" || r == "女兒(較年輕)" || r == "妹妹(較年長)") return "外甥女";
-			else if (r == "姊姊"  || r == "姊姊(較年長)" || r == "妹妹(較年長)") return "妻姊";
-			else if (r == "妹妹(較年輕)" || r == "姊姊(較年輕)"/*不應該出現*/ ) return "妻妹";
+			else if (r == "姊姊" || r == "姊姊(較年長)" || r == "妹妹(較年長)") return "妻姊";
+			else if (r == "妹妹(較年輕)" || r == "姊姊(較年輕)") return "妻妹";
 			else if (r == "妹妹") return "妻";
 			else if (r == "媽媽") return "妻母";
-			else /*if (r == "妻子")*/ return "妻兄嫂";
+			else return "妻兄嫂";
 		}
 	}
 	//妻弟、妻弟媳
 	string wife_Ybother(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "外甥";
-			else if (r == "哥哥" || r == "弟弟(較年長)"/*不應該出現*/ || r == "哥哥(較年長)") return "妻兄";
-			//else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)" || r == "弟弟") return "妻弟";
+			else if (r == "哥哥" || r == "弟弟(較年長)" || r == "哥哥(較年長)") return "妻兄";
 			else if (r == "爸爸") return "妻父";
 			else if (r == "我") return n;
-			else /*if (r == "丈夫")*/ return "妻弟";
+			else return "妻弟";
 		}
 		else {
 			if (r == "女兒" || r == "女兒(較年長)" || r == "女兒(較年輕)") return "外甥女";
-			else if (r == "妹妹(較年長)"/*不應該出現*/ || r == "姊姊(較年長)" ) return "妻姊";
+			else if (r == "妹妹(較年長)" || r == "姊姊(較年長)") return "妻姊";
 			else if (r == "妹妹(較年輕)" || r == "姊姊(較年輕)" || r == "妹妹") return "妻妹";
 			else if (r == "姊姊") return "妻";
 			else if (r == "媽媽") return "妻母";
-			else /*if (r == "妻子")*/  return"妻弟媳";
+			else  return"妻弟媳";
 		}
 	}
 	//妻姊、妻姊夫
@@ -453,54 +411,51 @@ public:
 		if (male == true) {
 			if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "外甥";
 			else if (r == "哥哥" || r == "弟弟(較年長)" || r == "哥哥(較年長)") return "妻兄";
-			else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)" /*不應該出現*/|| r == "弟弟") return "妻弟";
+			else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)" || r == "弟弟") return "妻弟";
 			else if (r == "爸爸") return "妻父";
 			else if (r == "我") return n;
-			else /*if (r == "丈夫")*/return "妻姊夫";
+			else return "妻姊夫";
 		}
 		else {
 			if (r == "女兒" || r == "女兒(較年長)" || r == "女兒(較年輕)") return "外甥女";
-			//else if (r == "妹妹(較年長)" || r == "姊姊(較年長)" || r == "姊姊") return "妻姊";
-			else if (r == "妹妹(較年輕)" || r == "姊姊(較年輕)" /*不應該出現*/ ) return "妻妹";
+			else if (r == "妹妹(較年輕)" || r == "姊姊(較年輕)") return "妻妹";
 			else if (r == "妹妹") return "妻";
 			else if (r == "媽媽") return "妻母";
-			else /*if (r == "妻子")*/ return "妻姊";
+			else return "妻姊";
 		}
 	}
 	//妻妹、妻妹夫
 	string wife_Ysister(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "外甥";
-			else if (r == "哥哥" || r == "弟弟(較年長)"/*不應該出現*/ || r == "哥哥(較年長)") return "妻兄";
+			else if (r == "哥哥" || r == "弟弟(較年長)" || r == "哥哥(較年長)") return "妻兄";
 			else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)" || r == "弟弟") return "妻弟";
 			else if (r == "爸爸") return "妻父";
 			else if (r == "我") return n;
-			else /*if (r == "丈夫")*/return "妻妹夫";
+			else return "妻妹夫";
 		}
 		else {
 			if (r == "女兒" || r == "女兒(較年長)" || r == "女兒(較年輕)") return "外甥女";
-			else if (r == "妹妹(較年長)"/*不應該出現*/ || r == "姊姊(較年長)") return "妻姊";
-			//else if (r == "妹妹(較年輕)" || r == "姊姊(較年輕)" || r == "妹妹") return "妻妹";
+			else if (r == "妹妹(較年長)" || r == "姊姊(較年長)") return "妻姊";
 			else if (r == "姊姊") return "妻";
 			else if (r == "媽媽") return "妻母";
-			else /*if (r == "妻子")*/  return"妻妹";
+			else  return"妻妹";
 		}
 	}
 	//夫兄、夫兄嫂
 	string husband_Obother(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "姪子";
-			//else if (r == "哥哥" || r == "弟弟(較年長)" || r == "哥哥(較年長)") return "夫兄";
-			else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)"/*不應該出現*/) return "夫弟";
+			else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)") return "夫弟";
 			else if (r == "弟弟") return "夫";
 			else if (r == "爸爸") return "夫父";
 			else if (r == "我") return n;
-			else /*if (r == "丈夫")*/return "夫兄";
+			else return "夫兄";
 		}
 		else {
 			if (r == "女兒" || r == "女兒(較年長)" || r == "女兒(較年輕)") return "姪女";
 			else if (r == "妹妹(較年長)" || r == "姊姊(較年長)" || r == "姊姊") return "夫姊";
-			else if (r == "妹妹(較年輕)" || r == "姊姊(較年輕)"/*不應該出現*/ || r == "妹妹") return "夫妹";
+			else if (r == "妹妹(較年輕)" || r == "姊姊(較年輕)" || r == "妹妹") return "夫妹";
 			else if (r == "媽媽") return "夫母";
 			else /*if (r == "妻子")*/  return"夫兄嫂";
 		}
@@ -509,19 +464,18 @@ public:
 	string husband_Ybother(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "姪子";
-			else if (r == "弟弟(較年長)"/*不應該出現*/ || r == "哥哥(較年長)") return "夫兄";
-			//else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)" || r == "弟弟") return "夫弟";
+			else if (r == "弟弟(較年長)" || r == "哥哥(較年長)") return "夫兄";
 			else if (r == "哥哥") return "夫";
 			else if (r == "爸爸") return "夫父";
 			else if (r == "我") return n;
-			else /*if (r == "丈夫")*/return "夫弟";
+			else return "夫弟";
 		}
 		else {
 			if (r == "女兒" || r == "女兒(較年長)" || r == "女兒(較年輕)") return "姪女";
-			else if (r == "妹妹(較年長)" /*不應該出現*/ || r == "姊姊(較年長)" || r == "姊姊") return "夫姊";
+			else if (r == "妹妹(較年長)" || r == "姊姊(較年長)" || r == "姊姊") return "夫姊";
 			else if (r == "妹妹(較年輕)" || r == "姊姊(較年輕)" || r == "妹妹") return "夫妹";
 			else if (r == "媽媽") return "夫母";
-			else /*if (r == "妻子")*/  return"夫弟媳";
+			else return"夫弟媳";
 		}
 	}
 	//夫姊、夫姊夫
@@ -529,37 +483,35 @@ public:
 		if (male == true) {
 			if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "外甥";
 			else if (r == "弟弟(較年長)" || r == "哥哥(較年長)" || r == "哥哥") return "夫兄";
-			else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)"/*不應該出現*/) return "夫弟";
+			else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)") return "夫弟";
 			else if (r == "弟弟") return "夫";
 			else if (r == "爸爸") return "夫父";
 			else if (r == "我") return n;
-			else /*if (r == "丈夫")*/return "夫姊夫";
+			else return "夫姊夫";
 		}
 		else {
 			if (r == "女兒" || r == "女兒(較年長)" || r == "女兒(較年輕)") return "外甥女";
-			//else if (r == "妹妹(較年長)" || r == "姊姊(較年長)" || r == "姊姊") return "夫姊";
 			else if (r == "妹妹(較年輕)" || r == "姊姊(較年輕)" || r == "妹妹") return "夫妹";
 			else if (r == "媽媽") return "夫母";
-			else /*if (r == "妻子")*/  return"夫姊";
+			else  return"夫姊";
 		}
 	}
 	//夫妹、夫妹夫
 	string husband_Ysister(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "外甥";
-			else if (r == "弟弟(較年長)"/*不應該出現*/ || r == "哥哥(較年長)") return "夫兄";
+			else if (r == "弟弟(較年長)" || r == "哥哥(較年長)") return "夫兄";
 			else if (r == "弟弟(較年輕)" || r == "哥哥(較年輕)" || r == "弟弟") return "夫弟";
 			else if (r == "哥哥") return "夫";
 			else if (r == "爸爸") return "夫父";
 			else if (r == "我") return n;
-			else /*if (r == "丈夫")*/return "夫妹夫";
+			else return "夫妹夫";
 		}
 		else {
 			if (r == "女兒" || r == "女兒(較年長)" || r == "女兒(較年輕)") return "外甥女";
-			else if (r == "妹妹(較年長)"/*不應該出現*/ || r == "姊姊(較年長)" || r == "姊姊") return "夫姊";
-			//else if (r == "妹妹(較年輕)" || r == "姊姊(較年輕)" || r == "妹妹") return "夫妹";
+			else if (r == "妹妹(較年長)" || r == "姊姊(較年長)" || r == "姊姊") return "夫姊";
 			else if (r == "媽媽") return "夫母";
-			else /*if (r == "妻子")*/  return"夫妹";
+			else return"夫妹";
 		}
 	}
 	//女兒、女婿
@@ -570,21 +522,19 @@ public:
 			else if (r == "爸爸" && (mysex == 1 || mysex == 3)) return "夫";
 			else if (r == "爸爸" && (mysex == 1 || mysex == 2)) return "自己";
 			else if (r == "我") return n;
-			else /*if (r == "丈夫")*/return "女婿";
+			else return "女婿";
 		}
 		else {
 			if (r == "女兒" || r == "女兒(較年長)" || r == "女兒(較年輕)") return "外孫";
-			//else if (r == "妹妹(較年長)" || r == "姊姊(較年長)" || r == "姊姊" || r == "妹妹(較年輕)" || r == "姊姊(較年輕)" || r == "妹妹") return "女兒";
 			else if (r == "媽媽" && (mysex == 1 || mysex == 2)) return "妻";
 			else if (r == "媽媽" && (mysex == 1 || mysex == 3)) return "自己";
-			else /*if (r == "妻子")*/  return"女兒";
+			else return"女兒";
 		}
 	}
 	//兒子、媳婦
 	string son(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "兒子" || r == "兒子(較年輕)" || r == "兒子(較年長)") return "孫子";
-			//else if (r == "弟弟(較年長)" || r == "哥哥(較年長)" || r == "哥哥" || r == "弟弟(較年輕)" || r == "哥哥(較年輕)" || r == "弟弟") return "兒子";
 			else if (r == "爸爸" && (mysex == 1 || mysex == 3)) return "夫";
 			else if (r == "爸爸" && (mysex == 1 || mysex == 2)) return "自己";
 			else if (r == "我") return n;
@@ -595,7 +545,7 @@ public:
 			else if (r == "妹妹(較年長)" || r == "姊姊(較年長)" || r == "姊姊" || r == "妹妹(較年輕)" || r == "姊姊(較年輕)" || r == "妹妹") return "女兒";
 			else if (r == "媽媽" && (mysex == 1 || mysex == 2)) return "妻";
 			else if (r == "媽媽" && (mysex == 1 || mysex == 3)) return "自己";
-			else /*if (r == "妻子")*/  return"媳婦";
+			else  return"媳婦";
 		}
 	}
 };
@@ -603,7 +553,7 @@ class relate {
 	judge j;
 public:
 	bool sex(string r) {
-		if (r == "爸爸" || r == "哥哥" || r == "弟弟" || r == "丈夫" || r == "兒子(較年長)" ||r == "我"||r == "我(男)"
+		if (r == "爸爸" || r == "哥哥" || r == "弟弟" || r == "丈夫" || r == "兒子(較年長)" || r == "我" || r == "我(男)"
 			|| r == "兒子(較年輕)" || r == "兒子" || r == "哥哥(較年長)" || r == "哥哥(較年輕)" ||
 			r == "弟弟(較年長)" || r == "弟弟(較年輕)")
 			return true;
@@ -627,10 +577,10 @@ public:
 		else return n;
 	}
 	string search(string n, bool male, string r, vector<result_infor>& records) {
-		
-		if (n == "自己" /*|| n == "自己(男)" || n == "自己(女)"*/) return j.myself(male, r, n);
+
+		if (n == "自己") return j.myself(male, r, n);
 		else if (n == "父親") return j.father(male, r, n);
-		else if (n == "母親") return j.mother(male, r,n);
+		else if (n == "母親") return j.mother(male, r, n);
 		else if (n == "姊姊" || n == "姊夫") return j.older_sister(male, r, n);
 		else if (n == "哥哥" || n == "嫂嫂") return j.older_bother(male, r, n);
 		else if (n == "妹妹" || n == "妹夫") return j.younger_sister(male, r, n);
@@ -648,13 +598,13 @@ public:
 						records.pop_back();
 						pre = records.back().appellation;
 					}
-					return search(records.back().appellation, male, " " , records);
+					return search(records.back().appellation, male, " ", records);
 				}
 			}
 			else {
 				if (r == "我" || r == "我(男)" || r == "我(女)") return n;
 				else if (male == true) {
-					if (r == "哥哥" || r =="弟弟(較年長)" || r == "哥哥(較年長)") return "表兄";
+					if (r == "哥哥" || r == "弟弟(較年長)" || r == "哥哥(較年長)") return "表兄";
 					else if (r == "弟弟" || r == "弟弟(較年輕)" || r == "哥哥(較年輕)") return "表弟";
 				}
 				else {
@@ -689,9 +639,9 @@ public:
 		}
 		else if (n == "外甥女" || n == "外甥") {
 			if (r == "我" || r == "我(男)" || r == "我(女)") return n;
-			else if (r == "哥哥" || r =="哥哥(較年輕)" || r == "哥哥(較年長)" 
+			else if (r == "哥哥" || r == "哥哥(較年輕)" || r == "哥哥(較年長)"
 				|| r == "弟弟" || r == "弟弟(較年長)" || r == "弟弟(較年輕)") return "外甥";
-			else if (r == "姊姊" || r == "姊姊(較年輕)" || r == "姊姊(較年長)" 
+			else if (r == "姊姊" || r == "姊姊(較年輕)" || r == "姊姊(較年長)"
 				|| r == "妹妹" || r == "妹妹(較年長)" || r == "妹妹(較年輕)") return "外甥女";
 			else if (r == "爸爸" || r == "媽媽") {
 				if (records.size() > 1) { //防錯
@@ -744,7 +694,7 @@ public:
 		else if (n == "兒子" || n == "媳婦") return j.son(male, r, n);
 		else if (n == "外孫") {
 			if (r == "我" || r == "我(男)" || r == "我(女)") return n;
-			else if (r == "哥哥" || r == "弟弟" 
+			else if (r == "哥哥" || r == "弟弟"
 				|| r == "姊姊" || r == "妹妹"
 				|| r == "哥哥(較年長)" || r == "哥哥(較年輕)"
 				|| r == "弟弟(較年長)" || r == "弟弟(較年輕)"
@@ -768,8 +718,8 @@ public:
 				|| r == "哥哥(較年長)" || r == "哥哥(較年輕)"
 				|| r == "弟弟(較年長)" || r == "弟弟(較年輕)") return "孫子";
 			else if (r == "姊姊" || r == "妹妹"
-					|| r == "姊姊(較年長)" || r == "姊姊(較年輕)"
-					|| r == "妹妹(較年長)" || r == "妹妹(較年輕)") return "孫女";
+				|| r == "姊姊(較年長)" || r == "姊姊(較年輕)"
+				|| r == "妹妹(較年長)" || r == "妹妹(較年輕)") return "孫女";
 			else if (r == "爸爸" || r == "媽媽") {
 				if (records.size() > 1) { //防錯
 					records.pop_back();
@@ -794,37 +744,34 @@ int main(int argc, char* argv[])
 	string line;
 	vector<string> Arelation;
 	while (getline(fin, line)) {
-		//cout << line << endl;
-		int length = sizeof(line),i = 0;
+		int length = sizeof(line), i = 0;
 		string::size_type position;
-		
+
 		while (line.find("的", i) != line.npos) {
 			position = line.find("的", i);
 			position -= i;
 			string str = "";
-			for (int j = 0; j < position;j++) {
+			for (int j = 0; j < position; j++) {
 				str += line[i + j];
 			}
-			//cout << str << endl;
 			Arelation.push_back(str);
-			i += position+3;
+			i += position + 2;
 		}
 		string str = "";
-		for (int j = 0; i+j < line.length(); j++) {
+		for (int j = 0; i + j < line.length(); j++) {
 			str += line[i + j];
 		}
-		//cout << str << endl << endl;
 		Arelation.push_back(str);
-		
+
 
 		relate r;
-		
-		int index = 0,num = Arelation.size();
+
+		int index = 0, num = Arelation.size();
 		string Relation, now = Arelation[index];
 		result_infor searching;
 		vector<result_infor> records;                              //歷史稱謂紀錄
 		now = r.changeCall(now);
-		
+
 		searching.is_male = r.sex(now);
 		searching.appellation = now;
 		records.push_back(searching);
@@ -836,7 +783,7 @@ int main(int argc, char* argv[])
 			if (Relation == "我") {
 				searching.is_male = records.back().is_male;
 			}
-			else 
+			else
 				searching.is_male = r.sex(Relation);
 
 			searching.appellation = r.search(now, searching.is_male, Relation, records);
@@ -844,23 +791,13 @@ int main(int argc, char* argv[])
 			now = searching.appellation;
 			index++;
 		}
-		cout /*<< "答: " */<< now /*<< endl*/ << endl;
+		cout << now << endl;
 		mysex = 1;
 		Arelation.clear();
-	
+
 	}
 
 	fin.close();
 	return 0;
 }
 
-// 執行程式: Ctrl + F5 或 [偵錯] > [啟動但不偵錯] 功能表
-// 偵錯程式: F5 或 [偵錯] > [啟動偵錯] 功能表
-
-// 開始使用的提示: 
-//   1. 使用 [方案總管] 視窗，新增/管理檔案
-//   2. 使用 [Team Explorer] 視窗，連線到原始檔控制
-//   3. 使用 [輸出] 視窗，參閱組建輸出與其他訊息
-//   4. 使用 [錯誤清單] 視窗，檢視錯誤
-//   5. 前往 [專案] > [新增項目]，建立新的程式碼檔案，或是前往 [專案] > [新增現有項目]，將現有程式碼檔案新增至專案
-//   6. 之後要再次開啟此專案時，請前往 [檔案] > [開啟] > [專案]，然後選取 .sln 檔案
