@@ -1,4 +1,4 @@
-﻿// 1072019 
+// 1072019 
 //作品：稱謂計算器
 //製作者：李苡瑄
 //完成日期(最後修改): 2021/01/05
@@ -21,7 +21,7 @@ struct result_infor {
 };
 class judge {
 public:
-	//自己
+	//以自己出發
 	string myself(bool male, string r, string n) {
 		if (male == true) {
 			if (r == "爸爸") return "父親";
@@ -552,6 +552,11 @@ public:
 class relate {
 	judge j;
 public:
+    /**
+     * @brief 判斷性別
+     * @param 關係
+     * @return 男：true、女：false
+    */
 	bool sex(string r) {
 		if (r == "爸爸" || r == "哥哥" || r == "弟弟" || r == "丈夫" || r == "兒子(較年長)" || r == "我" || r == "我(男)"
 			|| r == "兒子(較年輕)" || r == "兒子" || r == "哥哥(較年長)" || r == "哥哥(較年輕)" ||
@@ -560,6 +565,11 @@ public:
 		else
 			return false;
 	}
+    /**
+     * @brief 以我為出發回傳稱呼
+     * @param 關係
+     * @return 稱謂
+    */
 	string changeCall(string n) {
 		if (n == "爸爸") return "父親";
 		else if (n == "媽媽") return "母親";
@@ -576,6 +586,12 @@ public:
 		else if (n == "我(男)") { mysex = 2; return "自己"; }
 		else return n;
 	}
+    /**
+     * @param 現在的稱謂
+     * @param 是不是男的
+     * @param 關係
+     * @param 歷史稱謂
+    */
 	string search(string n, bool male, string r, vector<result_infor>& records) {
 
 		if (n == "自己") return j.myself(male, r, n);
@@ -590,6 +606,7 @@ public:
 		else if (n == "外祖父" || n == "外祖母") return j.mother_parents(male, r, n);
 		else if (n == "外祖父" || n == "外祖母") return j.mother_parents(male, r, n);
 		else if (n == "表兄" || n == "表弟" || n == "表姊" || n == "表妹") {
+            //ex:爸爸的妹妹的兒子的媽媽
 			if (r == "爸爸" || r == "媽媽") {
 				if (records.size() > 1) { //防錯
 					records.pop_back();
@@ -643,7 +660,8 @@ public:
 				|| r == "弟弟" || r == "弟弟(較年長)" || r == "弟弟(較年輕)") return "外甥";
 			else if (r == "姊姊" || r == "姊姊(較年輕)" || r == "姊姊(較年長)"
 				|| r == "妹妹" || r == "妹妹(較年長)" || r == "妹妹(較年輕)") return "外甥女";
-			else if (r == "爸爸" || r == "媽媽") {
+			//ex：我的姊姊的女兒的爸爸
+            else if (r == "爸爸" || r == "媽媽") {
 				if (records.size() > 1) { //防錯
 					records.pop_back();
 					string pre = records.back().appellation;
@@ -662,7 +680,8 @@ public:
 				|| r == "弟弟" || r == "弟弟(較年長)" || r == "弟弟(較年輕)") return "姪子";
 			else if (r == "姊姊" || r == "姊姊(較年輕)" || r == "姊姊(較年長)"
 				|| r == "妹妹" || r == "妹妹(較年長)" || r == "妹妹(較年輕)") return "姪女";
-			else if (r == "爸爸" || r == "媽媽") {
+			//ex：我的弟弟的女兒的爸爸
+            else if (r == "爸爸" || r == "媽媽") {
 				if (records.size() > 1) { //防錯
 					records.pop_back();
 					string pre = records.back().appellation;
@@ -700,6 +719,7 @@ public:
 				|| r == "弟弟(較年長)" || r == "弟弟(較年輕)"
 				|| r == "姊姊(較年長)" || r == "姊姊(較年輕)"
 				|| r == "妹妹(較年長)" || r == "妹妹(較年輕)") return "外孫";
+            //ex：我的女兒的兒子的媽媽
 			else if (r == "爸爸" || r == "媽媽") {
 				if (records.size() > 1) { //防錯
 					records.pop_back();
@@ -720,6 +740,7 @@ public:
 			else if (r == "姊姊" || r == "妹妹"
 				|| r == "姊姊(較年長)" || r == "姊姊(較年輕)"
 				|| r == "妹妹(較年長)" || r == "妹妹(較年輕)") return "孫女";
+            //ex：我的兒子的兒子的媽媽
 			else if (r == "爸爸" || r == "媽媽") {
 				if (records.size() > 1) { //防錯
 					records.pop_back();
@@ -747,6 +768,7 @@ int main(int argc, char* argv[])
 		int length = sizeof(line), i = 0;
 		string::size_type position;
 
+        //將關係分割出來
 		while (line.find("的", i) != line.npos) {
 			position = line.find("的", i);
 			position -= i;
@@ -758,6 +780,7 @@ int main(int argc, char* argv[])
 			i += position + 2;
 		}
 		string str = "";
+        //取出最後一個
 		for (int j = 0; i + j < line.length(); j++) {
 			str += line[i + j];
 		}
@@ -765,13 +788,13 @@ int main(int argc, char* argv[])
 
 
 		relate r;
-
+        //第一個單獨處理
 		int index = 0, num = Arelation.size();
 		string Relation, now = Arelation[index];
 		result_infor searching;
-		vector<result_infor> records;                              //歷史稱謂紀錄
+		vector<result_infor> records; //歷史稱謂紀錄
 		now = r.changeCall(now);
-
+        //判斷性別
 		searching.is_male = r.sex(now);
 		searching.appellation = now;
 		records.push_back(searching);
@@ -781,6 +804,7 @@ int main(int argc, char* argv[])
 			Relation = Arelation[index];
 			//判斷接下來性別
 			if (Relation == "我") {
+                //回上一層
 				searching.is_male = records.back().is_male;
 			}
 			else
@@ -800,4 +824,3 @@ int main(int argc, char* argv[])
 	fin.close();
 	return 0;
 }
-
